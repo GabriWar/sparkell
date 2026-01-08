@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AI Prompt Settings</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #555;
+      border-bottom: 2px solid #4CAF50;
+      padding-bottom: 5px;
+    }
+
+    .section {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .field-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #555;
+      font-size: 13px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+
+    button.secondary {
+      background: #666;
+    }
+
+    button.secondary:hover {
+      background: #555;
+    }
+
+    button.danger {
+      background: #f44336;
+    }
+
+    button.danger:hover {
+      background: #d32f2f;
+    }
+
+    button.small {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    .api-key-item {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .api-key-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .api-key-actions {
+      display: flex;
+      gap: 5px;
+    }
+
+    .prompt-item {
+      background: #f9f9f9;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .hotkey-badge {
+      background: #4CAF50;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .hotkey-badge.unassigned {
+      background: #999;
+    }
+
+    .status {
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      display: block;
+    }
+
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      display: block;
+    }
+
+    .help-text {
+      font-size: 11px;
+      color: #888;
+      margin-top: 3px;
+    }
+
+    .toggle-password {
+      cursor: pointer;
+      color: #4CAF50;
+      font-size: 11px;
+      margin-top: 3px;
+      display: inline-block;
+    }
+
+    .add-button {
+      width: 100%;
+      background: #2196F3;
+      margin-top: 10px;
+    }
+
+    .add-button:hover {
+      background: #1976D2;
+    }
+
+    .provider-badge {
+      display: inline-block;
+      background: #e0e0e0;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      margin-left: 8px;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .flex-row > * {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sparkell Settings</h1>
+
+  <div id="loading" style="display: none;">Loading...</div>
+
+  <!-- Prompts Section -->
+  <div class="section">
+    <h2>Prompts</h2>
+
+    <div class="field-group">
+      <label>Hotkey Assignments</label>
+      <div style="font-size: 12px; color: #666; margin-bottom: 10px;">
+        Assign prompts to keyboard shortcuts:
+      </div>
+      <div class="flex-row">
+        <div>
+          <label style="font-size: 11px;">Alt+Shift+1</label>
+          <select id="hotkey-1" style="font-size: 12px;"></select>
+        </div>
+        <div>
+          <label style="font-size: 11px;">Alt+Shift+2</label>
+          <select id="hotkey-2" style="font-size: 12px;"></select>
+        </div>
+        <div>
+          <label style="font-size: 11px;">Alt+Shift+3</label>
+          <select id="hotkey-3" style="font-size: 12px;"></select>
+        </div>
+        <div>
+          <label style="font-size: 11px;">Alt+Shift+4</label>
+          <select id="hotkey-4" style="font-size: 12px;"></select>
+        </div>
+      </div>
+      <button id="save-hotkeys-btn" style="width: 100%; margin-top: 10px;">Save Hotkey Assignments</button>
+    </div>
+
+    <h2 style="margin-top: 25px;">All Prompts</h2>
+    <div id="prompts-list"></div>
+
+    <button id="add-prompt-btn" class="add-button">+ Add New Prompt</button>
+
+    <h2 style="margin-top: 25px; cursor: pointer; user-select: none;" id="api-keys-header">
+      API Keys <span id="api-keys-toggle">▼</span>
+    </h2>
+    <div id="api-keys-content" style="display: none;">
+      <div class="field-group">
+        <label>Select API Key</label>
+        <select id="api-keys-dropdown">
+          <option value="">No keys added yet</option>
+        </select>
+      </div>
+
+      <div id="selected-key-details" style="display: none;">
+        <div class="api-key-item">
+          <div class="api-key-header">
+            <div>
+              <strong id="selected-key-provider"></strong>
+              <span class="provider-badge" id="selected-key-name"></span>
+            </div>
+            <div class="api-key-actions">
+              <button id="fetch-models-btn" class="small secondary">Fetch Models</button>
+              <button id="delete-key-btn" class="small danger">Delete</button>
+            </div>
+          </div>
+          <div>
+            <span id="selected-key-value"></span>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="margin-top: 20px;">Add New API Key</h2>
+      <div class="field-group">
+        <label>Provider</label>
+        <select id="new-key-provider">
+          <option value="">Select Provider</option>
+          <option value="openrouter">OpenRouter</option>
+          <option value="gemini">Google Gemini</option>
+          <option value="anthropic">Anthropic Claude</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label>Key Name (optional)</label>
+        <input type="text" id="new-key-name" placeholder="e.g., My OpenRouter Key">
+      </div>
+
+      <div class="field-group">
+        <label>API Key</label>
+        <input type="password" id="new-key-value" placeholder="sk-...">
+      </div>
+
+      <button id="add-key-btn" class="add-button">Add API Key</button>
+    </div>
+
+    <h2 style="margin-top: 25px; cursor: pointer; user-select: none;" id="backup-restore-header-sidebar">
+      Backup & Restore <span id="backup-restore-toggle-sidebar">▼</span>
+    </h2>
+    <div id="backup-restore-content-sidebar" style="display: none;">
+      <div class="flex-row">
+        <button id="export-prompts-sidebar" class="secondary">Export Prompts</button>
+        <button id="import-prompts-sidebar" class="secondary">Import Prompts</button>
+      </div>
+      <input type="file" id="import-file-sidebar" accept=".json" style="display: none;">
+    </div>
+  </div>
+
+  <!-- New Prompt Modal (initially hidden) -->
+  <div id="prompt-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;">
+      <h2 style="margin-top: 0;">Add/Edit Prompt</h2>
+
+      <div class="field-group">
+        <label>Prompt Name</label>
+        <input type="text" id="modal-prompt-name" placeholder="e.g., Fix Grammar">
+      </div>
+
+      <div class="field-group">
+        <label>AI Provider</label>
+        <div style="display: flex; gap: 5px;">
+          <select id="modal-provider" style="flex: 1;"></select>
+          <button id="modal-fetch-models" class="small" style="margin: 0;">Fetch Models</button>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>
+          Model
+          <span style="float: right; font-size: 11px; color: #4CAF50; cursor: pointer;" id="toggle-model-input">
+            <span id="model-input-type">Manual Entry</span>
+          </span>
+        </label>
+        <select id="modal-model" style="display: block;">
+          <option value="">Select a provider first</option>
+        </select>
+        <input type="text" id="modal-model-manual" placeholder="e.g., gemini-1.5-pro or anthropic/claude-3.5-sonnet" style="display: none;">
+        <div class="help-text">Click "Manual Entry" to type a model ID directly</div>
+      </div>
+
+      <div class="field-group">
+        <label>Prompt Template</label>
+        <textarea id="modal-prompt-text" placeholder="Use {text} as placeholder for selected text&#10;&#10;Example:&#10;Fix grammar: {text}"></textarea>
+        <div class="help-text">Use {text} placeholder for selected text</div>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <button id="save-prompt-btn" style="flex: 1;">Save Prompt</button>
+        <button id="cancel-prompt-btn" class="secondary" style="flex: 1;">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="status" class="status"></div>
+
+  <script src="crypto-helper.js"></script>
+  <script src="sidebar.js"></script>
+</body>
+</html>

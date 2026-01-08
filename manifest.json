@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "Sparkell",
+  "version": "1.0.0",
+  "description": "AI-powered text editing with custom prompts and keyboard shortcuts",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "sidebar.html"
+  },
+  "commands": {
+    "prompt-1": {
+      "suggested_key": {
+        "default": "Alt+Shift+1"
+      },
+      "description": "Execute prompt slot 1"
+    },
+    "prompt-2": {
+      "suggested_key": {
+        "default": "Alt+Shift+2"
+      },
+      "description": "Execute prompt slot 2"
+    },
+    "prompt-3": {
+      "suggested_key": {
+        "default": "Alt+Shift+3"
+      },
+      "description": "Execute prompt slot 3"
+    },
+    "prompt-4": {
+      "suggested_key": {
+        "default": "Alt+Shift+4"
+      },
+      "description": "Execute prompt slot 4"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

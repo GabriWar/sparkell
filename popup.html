@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sparkell</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 400px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #ffffff;
+      color: #2C3E50;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #1E3A8A;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .section {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #1E3A8A;
+      font-weight: 600;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #60A5FA;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #3B82F6;
+    }
+
+    button.secondary {
+      background: #93C5FD;
+      margin-top: 8px;
+    }
+
+    button.secondary:hover {
+      background: #60A5FA;
+    }
+
+    .hotkey-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .hotkey-label {
+      background: #60A5FA;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    select {
+      flex: 1;
+      padding: 8px;
+      border: 2px solid #BFDBFE;
+      border-radius: 6px;
+      font-size: 13px;
+      background: white;
+      color: #2C3E50;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #60A5FA;
+    }
+
+    .status {
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 13px;
+      display: none;
+      text-align: center;
+    }
+
+    .status.success {
+      background: #D1FAE5;
+      color: #065F46;
+      display: block;
+    }
+
+    .status.error {
+      background: #FEE2E2;
+      color: #991B1B;
+      display: block;
+    }
+
+    .info-text {
+      font-size: 12px;
+      color: #6B7280;
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sparkell</h1>
+
+  <div class="section">
+    <h2>Keyboard Shortcuts</h2>
+    <div class="hotkey-row">
+      <div class="hotkey-label">Alt+Shift+1</div>
+      <select id="hotkey-1">
+        <option value="">-- None --</option>
+      </select>
+    </div>
+    <div class="hotkey-row">
+      <div class="hotkey-label">Alt+Shift+2</div>
+      <select id="hotkey-2">
+        <option value="">-- None --</option>
+      </select>
+    </div>
+    <div class="hotkey-row">
+      <div class="hotkey-label">Alt+Shift+3</div>
+      <select id="hotkey-3">
+        <option value="">-- None --</option>
+      </select>
+    </div>
+    <div class="hotkey-row">
+      <div class="hotkey-label">Alt+Shift+4</div>
+      <select id="hotkey-4">
+        <option value="">-- None --</option>
+      </select>
+    </div>
+    <button id="save-shortcuts">Save Shortcuts</button>
+  </div>
+
+  <div class="section">
+    <button id="open-settings">Open Full Settings</button>
+    <div class="info-text">
+      Configure API keys, create prompts, and manage models
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 style="cursor: pointer; user-select: none;" id="backup-restore-header">
+      Backup & Restore <span id="backup-restore-toggle">▼</span>
+    </h2>
+    <div id="backup-restore-content" style="display: none;">
+      <button id="export-prompts" class="secondary">Export Prompts</button>
+      <button id="import-prompts" class="secondary">Import Prompts</button>
+      <input type="file" id="import-file" accept=".json" style="display: none;">
+    </div>
+  </div>
+
+  <div class="info-text">
+    Select text on any webpage, then press a keyboard shortcut to execute your prompt
+  </div>
+
+  <div id="status" class="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
