@@ -1,0 +1,36 @@
+{
+  "prompts": [
+    {
+      "id": "mk5f9kkgb3ml7s29ju",
+      "model": "gemini-2.5-flash-lite",
+      "name": "Fix grammar",
+      "provider": "gemini",
+      "text": "IMPORTANT: Return only the corrected text. Do not format the response or add explanations. I need only the final corrected text in the original language.\n\nCorrect the grammar and spelling of the text below. Rewrite it in a more professional, clear, and intelligent manner while preserving exactly the same meaning as the original text. Maintain the original structure and language as much as possible, making only the necessary changes to improve correctness and formality. Do not add any new information or alter the tone of the message.\n\n{text}",
+      "updatedAt": 1767878135443
+    },
+    {
+      "id": "mk5gxf86hg5qccwvqqu",
+      "model": "gemini-3-flash-preview",
+      "name": "Summary",
+      "provider": "gemini",
+      "text": "IMPORTANT: Return only the summarized text. Do not format the response or add explanations. I need only the final summarized text in the original language.\n\nSummarize the text below in a clear, concise, and professional manner while preserving the original meaning and intent. Keep the summary faithful to the source, without adding new information, interpretations, or opinions. Maintain the original tone and language, reducing the text only to its essential points.\n\n{text}",
+      "updatedAt": 1767878275457
+    },
+    {
+      "id": "mk5gzp5vym7itarlx5c",
+      "model": "gemini-3-flash-preview",
+      "name": "Explain",
+      "provider": "gemini",
+      "text": "IMPORTANT: Return only the explanation. Do not format the response or add explanations about the process. I need only the final explanation in the original language.\n\nExplain the text below in a clear, detailed, and structured manner. Break down the ideas, concepts, and intentions behind the text, clarifying any implicit points while remaining faithful to the original meaning. Do not add assumptions, opinions, or external information beyond what is necessary to fully understand the content. Preserve the original tone and language.\n\n{text}",
+      "updatedAt": 1767878290201
+    }
+  ],
+  "hotkeyAssignments": {
+    "1": "mk5f9kkgb3ml7s29ju",
+    "2": "mk5gxf86hg5qccwvqqu",
+    "3": "mk5gzp5vym7itarlx5c",
+    "4": null
+  },
+  "exportDate": "2026-01-08T13:34:33.093Z",
+  "version": "1.0"
+}

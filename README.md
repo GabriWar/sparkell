@@ -18,6 +18,18 @@ AI-powered text editing Chrome extension with custom prompts and keyboard shortc
 3. Enable "Developer mode"
 4. Click "Load unpacked" and select the extension folder
 
+## Quick Start
+
+Import the default prompts to get started quickly:
+1. Download [`default-prompts.json`](default-prompts.json)
+2. Click the extension icon and open "Backup & Restore"
+3. Click "Import Prompts" and select the downloaded file
+
+The default prompts include:
+- **Fix grammar** (Alt+Shift+1): Correct grammar and improve writing
+- **Summary** (Alt+Shift+2): Summarize text concisely
+- **Explain** (Alt+Shift+3): Get detailed explanations
+
 ## Usage
 
 1. Add your API keys in the settings sidebar
