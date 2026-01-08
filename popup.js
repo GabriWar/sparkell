@@ -68,14 +68,13 @@ async function saveShortcuts() {
   }
 }
 
-// Open settings sidebar
+// Open settings in a new tab
 async function openSettings() {
   try {
-    const currentWindow = await chrome.windows.getCurrent();
-    await chrome.sidePanel.open({ windowId: currentWindow.id });
+    await chrome.tabs.create({ url: 'sidebar.html' });
     self.close();
   } catch (error) {
-    console.error('Error opening sidebar:', error);
+    console.error('Error opening settings:', error);
     showStatus('Error opening settings: ' + error.message, true);
   }
 }

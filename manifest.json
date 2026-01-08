@@ -6,9 +6,13 @@
   "permissions": [
     "activeTab",
     "scripting",
-    "storage",
-    "sidePanel"
+    "storage"
   ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "sparkell@gabriwar.dev"
+    }
+  },
   "host_permissions": [
     "<all_urls>"
   ],
@@ -29,9 +33,6 @@
       "48": "icon48.png",
       "128": "icon128.png"
     }
-  },
-  "side_panel": {
-    "default_path": "sidebar.html"
   },
   "commands": {
     "prompt-1": {
